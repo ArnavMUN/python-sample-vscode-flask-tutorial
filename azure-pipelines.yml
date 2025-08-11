@@ -1,0 +1,18 @@
+trigger:
+- master
+
+pool:
+name: Default
+
+steps:
+- checkout: self
+
+- task:  UsePythonVersion@0
+  inputs:
+   versionSpec: '3.x'
+
+- script: pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: python -m unittest discover
+  displayName: 'Run tests'
